@@ -6,6 +6,7 @@ const grid = document.getElementById('grid');
 const colorPicker = document.getElementById("color");
 const blackButton = document.getElementById("blackButton");
 const colorfulButton = document.getElementById("colorfulButton");
+const eraseButton = document.getElementById("eraseButton");
 const clearGridButton = document.getElementById("clearButton");
 const sliderText = document.getElementById("sizeText");
 const slider = document.getElementById("myRange");
@@ -14,6 +15,9 @@ const slider = document.getElementById("myRange");
 colorPicker.addEventListener('change', (e) => chooseMode(e.target.value))
 blackButton.addEventListener('click', () => chooseMode('Black'));
 colorfulButton.addEventListener('click', () => chooseMode('Colorful'));
+eraseButton.addEventListener('click', () => chooseMode('Erase'));
+
+
 clearGridButton.addEventListener('click', () => changeGridSize(currentSize));
 
 slider.oninput = (e) => {updateSizeValue(e.target.value)};
@@ -54,16 +58,28 @@ const chooseMode = (new_mode) => {
         mode = new_mode
         blackButton.classList.add("active");
         colorfulButton.classList.remove("active");
+        eraseButton.classList.remove("active");
+
     }
     else if (new_mode === 'Colorful') {
         mode = new_mode;
         colorfulButton.classList.add("active");
+        blackButton.classList.remove("active");
+        eraseButton.classList.remove("active");
+
+    }
+    else if (new_mode === 'Erase') {
+        mode = new_mode;
+        eraseButton.classList.add("active");
+        colorfulButton.classList.remove("active");
         blackButton.classList.remove("active");
     }
     else {
         mode = new_mode;
         blackButton.classList.remove("active");
         colorfulButton.classList.remove("active");
+        eraseButton.classList.remove("active");
+
     }
 }
 
@@ -81,6 +97,11 @@ const addColor = (gridSquare) => {
             var RGBColor = "rgb(" + x + "," + y + "," + z + ")";
             gridSquare.style.backgroundColor = RGBColor;
             gridSquare.style.border = "none";
+        }
+        else if (mode === "Erase") {
+            gridSquare.style.backgroundColor = "white";
+            gridSquare.style.border =  "1px dotted lightgray";
+
         }
         else {
             // mode was set by the colorpicker, mode is set to a hex code value
