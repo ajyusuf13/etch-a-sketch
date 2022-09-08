@@ -1,4 +1,5 @@
 let mode = "Black";
+let gridLines = true;
 let currentSize = 32;
 let clickedToAddColor = false;
 
@@ -7,17 +8,16 @@ const colorPicker = document.getElementById("color");
 const blackButton = document.getElementById("blackButton");
 const colorfulButton = document.getElementById("colorfulButton");
 const eraseButton = document.getElementById("eraseButton");
+const toggleGridButton = document.getElementById("toggleGridButton")
 const clearGridButton = document.getElementById("clearButton");
 const sliderText = document.getElementById("sizeText");
 const slider = document.getElementById("myRange");
-
 
 colorPicker.addEventListener('change', (e) => chooseMode(e.target.value))
 blackButton.addEventListener('click', () => chooseMode('Black'));
 colorfulButton.addEventListener('click', () => chooseMode('Colorful'));
 eraseButton.addEventListener('click', () => chooseMode('Erase'));
-
-
+toggleGridButton.addEventListener('click', () => toggleGridLines());
 clearGridButton.addEventListener('click', () => changeGridSize(currentSize));
 
 slider.oninput = (e) => {updateSizeValue(e.target.value)};
@@ -30,13 +30,10 @@ const clearGrid = () => {
     clickedToAddColor = false;
 }
 
-
 const updateSizeValue = (new_val) => {
     currentSize = new_val;
     sliderText.textContent = `${new_val} by ${new_val}`;
 }
-
-
 
 const setupGrid = (new_size) => {
     grid.style.gridTemplateColumns = `repeat(${new_size} , 1fr)`;
@@ -114,6 +111,21 @@ const addColor = (gridSquare) => {
 const changeGridSize = (new_size) => {
     clearGrid();
     setupGrid(new_size);
+}
+
+const toggleGridLines = () => {
+    let gridItems = document.querySelectorAll('.gridSquare');
+
+    gridItems.forEach(gridItem => {
+        if (gridLines) {
+            gridItem.style.border = "none";
+        }
+        else {
+            gridItem.style.border = "1px dotted lightgray";
+        }
+    })
+    gridLines = !gridLines;
+
 }
 
 window.onload = () => {

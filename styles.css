@@ -23,7 +23,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2em;
+    gap: 1em;
     width: 200px;
     margin-bottom: 2em;
 }
@@ -74,8 +74,7 @@ button:hover {
 }
 
 .size-text {
-    margin-bottom: -1em;
-    margin-top: -7px;
+    margin-bottom: -7px;
 }
 
 /* The slider itself */
