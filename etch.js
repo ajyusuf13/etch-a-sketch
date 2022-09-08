@@ -1,29 +1,14 @@
-// const container = document.createElement('div');
-// container.className = "container";
-
-// const title = document.createElement('h1');
-// title.className = "title";
-// title.textContent = "Etch - A - Sketch";
-
-// const settings = documnet.createElement('div')
-
-// container.appendChild(title);
-// document.body.appendChild(container);
-
-
 let mode = "Black";
 let currentSize = 32;
 let clickedToAddColor = false;
 
 const grid = document.getElementById('grid');
-
 const colorPicker = document.getElementById("color");
 const blackButton = document.getElementById("blackButton");
 const colorfulButton = document.getElementById("colorfulButton");
 const clearGridButton = document.getElementById("clearButton");
-
-
-// console.log(colorPicker.value);
+const sliderText = document.getElementById("sizeText");
+const slider = document.getElementById("myRange");
 
 
 colorPicker.addEventListener('change', (e) => chooseMode(e.target.value))
@@ -31,14 +16,11 @@ blackButton.addEventListener('click', () => chooseMode('Black'));
 colorfulButton.addEventListener('click', () => chooseMode('Colorful'));
 clearGridButton.addEventListener('click', () => changeGridSize(currentSize));
 
-const sliderText = document.getElementById("sizeText");
-const slider = document.getElementById("myRange");
-
-
 slider.oninput = (e) => {updateSizeValue(e.target.value)};
 slider.onchange = (e) => {changeGridSize(parseInt(e.target.value))}
 
 
+// Functions
 const clearGrid = () => {
     grid.innerHTML = '';
     clickedToAddColor = false;
